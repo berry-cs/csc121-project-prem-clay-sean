@@ -8,23 +8,32 @@ import processing.event.MouseEvent;
  * location of the click;
  */
 public class CircleWorld {
-    // the position of the drop
-    double x;
-    double y;
+    
+    Enemy e1;
+    Enemy e2;
+    Enemy e3;
 
-    public CircleWorld(double x, double y) {
-        this.x = x;
-        this.y = y; 
+    public CircleWorld() {
+        e1 = new Enemy();
+        e2 = new Enemy();
+        e3 = new Enemy();
     }
     
+    public CircleWorld(Enemy e1, Enemy e2, Enemy e3) {
+        this.e1 = e1;
+        this.e2 = e2;
+        this.e3 = e3;
+    }
+
     /**
      * Renders a picture of the drop on the window
      */
     public PApplet draw(PApplet c) {
         c.background(255);
         c.text("Hello!", 20, 20);
-        c.fill(0, 0, 255);
-        c.circle((int)this.x, (int)this.y, 15);
+        e1.draw(c);
+        e2.draw(c);
+        e3.draw(c);
         return c;
     }
 
@@ -34,11 +43,7 @@ public class CircleWorld {
      * of the screen yet.
      */
     public CircleWorld update() {
-        if (this.y < 400) {
-            return new CircleWorld(this.x, this.y + .5);
-        } else {
-            return new CircleWorld((Math.random()*(400-0)+1),0);
-        }
+        return new CircleWorld(e1.fallDown(), e2.fallDown(), e3.fallDown());
     }
     
     /**
@@ -46,14 +51,7 @@ public class CircleWorld {
      * drop updated to the location of the mouse press.
      */
     public CircleWorld mousePressed(MouseEvent mev) {
-        return new CircleWorld(mev.getX(), mev.getY());
+        return this;
     }
     
-    /**
-     * Produces a string rendering of the position of the
-     * drop
-     */
-    public String toString() {
-        return "[" + x + ", " + y + "]";
-    }
 }

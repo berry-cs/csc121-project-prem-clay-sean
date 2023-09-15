@@ -6,7 +6,7 @@ import processing.event.*;
 
 class CircleWorldTest {
 
-    CircleWorld cw1 = new CircleWorld(100, 150);
+    CircleWorld cw1 = new CircleWorld();
     
     @Test
     void tests() {        
