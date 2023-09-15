@@ -37,7 +37,7 @@ public class CircleWorld {
         if (this.y < 400) {
             return new CircleWorld(this.x, this.y + .5);
         } else {
-            return this;
+            return new CircleWorld((Math.random()*(400-0)+1),0);
         }
     }
     
