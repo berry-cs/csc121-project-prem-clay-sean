@@ -12,17 +12,22 @@ public class CircleWorld {
     Enemy e1;
     Enemy e2;
     Enemy e3;
+    
+    Player p;
 
     public CircleWorld() {
         e1 = new Enemy();
         e2 = new Enemy();
         e3 = new Enemy();
+        
+        p = new Player();
     }
     
-    public CircleWorld(Enemy e1, Enemy e2, Enemy e3) {
+    public CircleWorld(Enemy e1, Enemy e2, Enemy e3, Player p) {
         this.e1 = e1;
         this.e2 = e2;
         this.e3 = e3;
+        this.p = p;
     }
 
     /**
@@ -34,6 +39,7 @@ public class CircleWorld {
         e1.draw(c);
         e2.draw(c);
         e3.draw(c);
+        p.draw(c);
         return c;
     }
 
@@ -43,7 +49,7 @@ public class CircleWorld {
      * of the screen yet.
      */
     public CircleWorld update() {
-        return new CircleWorld(e1.fallDown(), e2.fallDown(), e3.fallDown());
+        return new CircleWorld(e1.fallDown(), e2.fallDown(), e3.fallDown(), p);
     }
     
     /**
