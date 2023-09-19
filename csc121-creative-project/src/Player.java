@@ -1,6 +1,7 @@
 import processing.core.*;
 
 
+
 public class Player {
 
 	double x = 200;
@@ -23,6 +24,8 @@ public class Player {
 
         return c;
     }
+	
+	
 	
 	
 }

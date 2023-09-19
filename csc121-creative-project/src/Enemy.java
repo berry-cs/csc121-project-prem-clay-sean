@@ -16,11 +16,11 @@ public class Enemy {
         this.y = y;
     }
 
-    public PApplet draw(PApplet c) {
-        c.fill(0, 0, 255);
-        c.circle((int)this.x, (int)this.y, 15);
+    public PApplet draw(PApplet s) {
+        s.fill(0, 0, 255);
+        s.square((int)this.x, (int)this.y, 15);
 
-        return c;
+        return s;
     }
     
     /** makes the enemy reappear at a random x along the top */
