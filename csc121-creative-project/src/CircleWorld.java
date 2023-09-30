@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
 /**
@@ -34,7 +35,7 @@ public class CircleWorld {
      * Renders a picture of the drop on the window
      */
     public PApplet draw(PApplet c) {
-        c.background(255);
+        c.background(42);
         c.text("Hello!", 20, 20);
         e1.draw(c);
         e2.draw(c);
@@ -57,7 +58,23 @@ public class CircleWorld {
      * drop updated to the location of the mouse press.
      */
     public CircleWorld mousePressed(MouseEvent mev) {
-        return this;
+        //return new CircleWorld(e1.fallDown(), e2.fallDown(), e3.fallDown(), p.move());
+    return this;
+    }
+    
+    public CircleWorld keyPressed(KeyEvent kev) {
+    	if(kev.getKeyCode() == PApplet.RIGHT) {
+    		return new CircleWorld(e1.fallDown(), e2.fallDown(), e3.fallDown(), p.moveR());
+    		
+    	}
+    	else if(kev.getKeyCode() == PApplet.LEFT) {
+    		return new CircleWorld(e1.fallDown(), e2.fallDown(), e3.fallDown(), p.moveL());
+    		
+    	}
+    	else{
+    		return this;
+    	}
+        //return new CircleWorld(e1.fallDown(), e2.fallDown(), e3.fallDown(), p.move());
     }
     
 }

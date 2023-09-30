@@ -6,7 +6,7 @@ public class Player {
 
 	double x = 200;
 	double y = 350;
-	int moveRate = 5;
+	int moveRate = 50;
 	
 	
     public Player() {
@@ -25,6 +25,15 @@ public class Player {
         return c;
     }
 	
+    public Player moveR() {
+
+        return new Player (this.x + this.moveRate, this.y);
+    }
+	
+    public Player moveL() {
+        
+        return new Player (this.x - this.moveRate, this.y);
+    }
 	
 	
 	
