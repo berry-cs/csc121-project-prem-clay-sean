@@ -26,7 +26,7 @@ public class CircleApp extends PApplet {
     }
     
     public void keyPressed(KeyEvent kev) {
-        // w = w.keyPressed(kev);
+         w = w.keyPressed(kev);
     }
 
     public static void main(String[] args) {
