@@ -10,25 +10,26 @@ import processing.event.MouseEvent;
  */
 public class CircleWorld {
     
-    Enemy e1;
-    Enemy e2;
-    Enemy e3;
-    
+    //Enemy[] eList = {e1,e2,e3};
+    int numEnemies;
     Player p;
+    Enemy eList[];
 
     public CircleWorld() {
-        e1 = new Enemy();
-        e2 = new Enemy();
-        e3 = new Enemy();
-        
+        numEnemies = 6;
         p = new Player();
+        eList = new Enemy[numEnemies];
+        
+        for (int i = 0; i < numEnemies; i++) {
+            eList[i] = new Enemy();
+        }
     }
     
-    public CircleWorld(Enemy e1, Enemy e2, Enemy e3, Player p) {
-        this.e1 = e1;
-        this.e2 = e2;
-        this.e3 = e3;
+    public CircleWorld(int numEnemies, Player p, Enemy eList[]) {
+    	this.numEnemies = numEnemies;
         this.p = p;
+        this.eList=eList;
+        
     }
 
     /**
@@ -36,10 +37,13 @@ public class CircleWorld {
      */
     public PApplet draw(PApplet c) {
         c.background(42);
-        c.text("Hello!", 20, 20);
-        e1.draw(c);
-        e2.draw(c);
-        e3.draw(c);
+        c.text(this.eList.length, 20, 20);
+        
+
+        
+       for(int i = 0; i< eList.length; i++) {
+        	this.eList[i].draw(c);
+        	        }
         p.draw(c);
         return c;
     }
@@ -50,7 +54,13 @@ public class CircleWorld {
      * of the screen yet.
      */
     public CircleWorld update() {
-        return new CircleWorld(e1.fallDown(), e2.fallDown(), e3.fallDown(), p);
+        Enemy updatedEnemies[] = new Enemy[numEnemies];
+        for(int i = 0; i < numEnemies; i++) {
+            updatedEnemies[i] = this.eList[i].fallDown();
+        }
+        return new CircleWorld(numEnemies, p, updatedEnemies);
+   
+   
     }
     
     /**
@@ -62,14 +72,22 @@ public class CircleWorld {
     return this;
     }
     
+    
     public CircleWorld keyPressed(KeyEvent kev) {
     	if(kev.getKeyCode() == PApplet.RIGHT) {
-    		return new CircleWorld(e1.fallDown(), e2.fallDown(), e3.fallDown(), p.moveR());
-    		
+            Enemy updatedEnemies[] = new Enemy[numEnemies];
+            for(int i = 0; i < numEnemies; i++) {
+                updatedEnemies[i] = this.eList[i].fallDown();
+            }
+            return new CircleWorld(numEnemies, p.moveR(), updatedEnemies);
     	}
+  
     	else if(kev.getKeyCode() == PApplet.LEFT) {
-    		return new CircleWorld(e1.fallDown(), e2.fallDown(), e3.fallDown(), p.moveL());
-    		
+            Enemy updatedEnemies[] = new Enemy[numEnemies];
+            for(int i = 0; i < numEnemies; i++) {
+                updatedEnemies[i] = this.eList[i].fallDown();
+            }
+            return new CircleWorld(numEnemies, p.moveL(), updatedEnemies);
     	}
     	else{
     		return this;

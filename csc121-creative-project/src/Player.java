@@ -6,7 +6,7 @@ public class Player {
 
 	double x = 200;
 	double y = 350;
-	int moveRate = 50;
+	int moveRate = 5;
 	
 	
     public Player() {
