@@ -14,11 +14,15 @@ public class CircleWorld {
     int numEnemies;
     Player p;
     Enemy eList[];
+    int score;
+    int lives;
 
     public CircleWorld() {
-        numEnemies = 6;
+        numEnemies = 5;
         p = new Player();
         eList = new Enemy[numEnemies];
+        score = 0;
+        lives = 5;
         
         for (int i = 0; i < numEnemies; i++) {
             eList[i] = new Enemy();
@@ -37,7 +41,10 @@ public class CircleWorld {
      */
     public PApplet draw(PApplet c) {
         c.background(42);
-        c.text(this.eList.length, 20, 20);
+        c.textSize(25);
+        c.text("Score: " + this.score, 20, 40);
+        c.text("Lives: " + this.lives, 300, 40);
+
         
 
         
@@ -54,10 +61,19 @@ public class CircleWorld {
      * of the screen yet.
      */
     public CircleWorld update() {
+        for(int i = 0; i < numEnemies; i++) {
+        	if(p.collision(this.eList[i])) {
+        		//this.eList[i];
+        	}
+        	
+ 
+        }
         Enemy updatedEnemies[] = new Enemy[numEnemies];
         for(int i = 0; i < numEnemies; i++) {
             updatedEnemies[i] = this.eList[i].fallDown();
         }
+        
+        
         return new CircleWorld(numEnemies, p, updatedEnemies);
    
    

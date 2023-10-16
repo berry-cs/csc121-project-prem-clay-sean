@@ -5,6 +5,13 @@ public class Enemy {
     double x;
     double y;
     double fallRate = 5;
+    int size = 15;
+    
+    //hitbox vars
+    double ETop = y;
+    double EBot = y+size;
+    double ELeft = x;
+    double ERight = x+size;
     
     public Enemy() {
         this.x = (Math.random()*400+1);
@@ -18,7 +25,7 @@ public class Enemy {
 
     public PApplet draw(PApplet s) {
         s.fill(0, 0, 255);
-        s.square((int)this.x, (int)this.y, 15);
+        s.square((int)this.x, (int)this.y, size);
 
         return s;
     }
