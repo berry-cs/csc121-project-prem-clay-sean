@@ -3,12 +3,11 @@ import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
 /**
- * Represents an interactive application where a drop of
- * water falls down from the top of the window. If the 
- * user clicks the mouse, the drop is moved over to the
- * location of the click;
+ * produces an animation of severeal enemy squares falling from the top of the scre
+ * and the player must move the circle to avoid contact with 
+
  */
-public class CircleWorld {
+public class SquareEvade {
     
     //Enemy[] eList = {e1,e2,e3};
     int numEnemies;
@@ -17,7 +16,7 @@ public class CircleWorld {
     int score;
     int lives;
 
-    public CircleWorld() {
+    public SquareEvade() {
         numEnemies = 5;
         p = new Player();
         eList = new Enemy[numEnemies];
@@ -29,11 +28,12 @@ public class CircleWorld {
         }
     }
     
-    public CircleWorld(int numEnemies, Player p, Enemy eList[]) {
+    public SquareEvade(int numEnemies, Player p, Enemy eList[]) {
     	this.numEnemies = numEnemies;
         this.p = p;
         this.eList=eList;
-        
+        this.score = 0;
+        this.lives = 5;
     }
 
     /**
@@ -60,21 +60,21 @@ public class CircleWorld {
      * down a little bit, if it hasn't hit the bottom
      * of the screen yet.
      */
-    public CircleWorld update() {
-        for(int i = 0; i < numEnemies; i++) {
-        	if(p.collision(this.eList[i])) {
+    public SquareEvade update() {
+        //for(int i = 0; i < numEnemies; i++) {
+        	//if(p.collision(this.eList[i])) {
         		//this.eList[i];
-        	}
+        	//}
         	
  
-        }
+        //}
         Enemy updatedEnemies[] = new Enemy[numEnemies];
         for(int i = 0; i < numEnemies; i++) {
             updatedEnemies[i] = this.eList[i].fallDown();
         }
         
         
-        return new CircleWorld(numEnemies, p, updatedEnemies);
+        return new SquareEvade(numEnemies, p, updatedEnemies);
    
    
     }
@@ -83,19 +83,19 @@ public class CircleWorld {
      * Produces an updated world with the position of the
      * drop updated to the location of the mouse press.
      */
-    public CircleWorld mousePressed(MouseEvent mev) {
-        //return new CircleWorld(e1.fallDown(), e2.fallDown(), e3.fallDown(), p.move());
+    public SquareEvade mousePressed(MouseEvent mev) {
+        //return new SquareEvade(e1.fallDown(), e2.fallDown(), e3.fallDown(), p.move());
     return this;
     }
     
     
-    public CircleWorld keyPressed(KeyEvent kev) {
+    public SquareEvade keyPressed(KeyEvent kev) {
     	if(kev.getKeyCode() == PApplet.RIGHT) {
             Enemy updatedEnemies[] = new Enemy[numEnemies];
             for(int i = 0; i < numEnemies; i++) {
                 updatedEnemies[i] = this.eList[i].fallDown();
             }
-            return new CircleWorld(numEnemies, p.moveR(), updatedEnemies);
+            return new SquareEvade(numEnemies, p.moveR(), updatedEnemies);
     	}
   
     	else if(kev.getKeyCode() == PApplet.LEFT) {
@@ -103,12 +103,12 @@ public class CircleWorld {
             for(int i = 0; i < numEnemies; i++) {
                 updatedEnemies[i] = this.eList[i].fallDown();
             }
-            return new CircleWorld(numEnemies, p.moveL(), updatedEnemies);
+            return new SquareEvade(numEnemies, p.moveL(), updatedEnemies);
     	}
     	else{
     		return this;
     	}
-        //return new CircleWorld(e1.fallDown(), e2.fallDown(), e3.fallDown(), p.move());
+        //return new SquareEvade(e1.fallDown(), e2.fallDown(), e3.fallDown(), p.move());
     }
     
 }

@@ -5,14 +5,14 @@ import processing.event.*;
  * Provides the scaffolding to launch a Processing application
  */
 public class CircleApp extends PApplet {
-    CircleWorld w;
+    SquareEvade w;
     
     public void settings() {
         this.size(400, 400);
     }
     
     public void setup() {
-        w = new CircleWorld();        
+        w = new SquareEvade();        
     }
     
     public void draw() {
