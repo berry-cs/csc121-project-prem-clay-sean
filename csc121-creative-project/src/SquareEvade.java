@@ -37,7 +37,7 @@ public class SquareEvade {
     }
 
     /**
-     * Renders a picture of the drop on the window
+     * Renders a picture of an array of square, circle player, and the score/lives
      */
     public PApplet draw(PApplet c) {
         c.background(42);
@@ -56,32 +56,30 @@ public class SquareEvade {
     }
 
     /**
-     * Produces an updated world where the drop moves
-     * down a little bit, if it hasn't hit the bottom
-     * of the screen yet.
+     * Produces an updated scene where the squares are further down on the 
+     * screen and if prompted by the user the player to the left or right
      */
     public SquareEvade update() {
-        //for(int i = 0; i < numEnemies; i++) {
-        	//if(p.collision(this.eList[i])) {
-        		//this.eList[i];
-        	//}
-        	
- 
-        //}
+    	
+
         Enemy updatedEnemies[] = new Enemy[numEnemies];
         for(int i = 0; i < numEnemies; i++) {
             updatedEnemies[i] = this.eList[i].fallDown();
         }
         
-        
+//        for(int i = 0; i < numEnemies; i++) {
+//        	if(p.collision(updatedEnemies[i])) {
+//        		this.lives -=1;
+//        	}
+//        	
+//        }
         return new SquareEvade(numEnemies, p, updatedEnemies);
    
    
     }
     
     /**
-     * Produces an updated world with the position of the
-     * drop updated to the location of the mouse press.
+     *does nothing
      */
     public SquareEvade mousePressed(MouseEvent mev) {
         //return new SquareEvade(e1.fallDown(), e2.fallDown(), e3.fallDown(), p.move());
@@ -89,6 +87,9 @@ public class SquareEvade {
     }
     
     
+    /**
+     *controls the movement of the player using arrow keys
+     */
     public SquareEvade keyPressed(KeyEvent kev) {
     	if(kev.getKeyCode() == PApplet.RIGHT) {
             Enemy updatedEnemies[] = new Enemy[numEnemies];

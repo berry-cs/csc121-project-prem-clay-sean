@@ -8,19 +8,23 @@ public class Enemy {
     int size = 15;
     
     //hitbox vars
-    double ETop = y;
-    double EBot = y+size;
-    double ELeft = x;
-    double ERight = x+size;
+    double ETop;
+    double EBot;
+    double ELeft;
+    double ERight;
     
     public Enemy() {
-        this.x = (Math.random()*400+1);
-        this.y = Math.random()*(-500);
+        this (Math.random()*400+1,  Math.random()*(-500));
     }
     
     public Enemy(double x, double y) {
         this.x = x;
         this.y = y;
+        
+        ETop = y;
+        EBot = y+size;
+        ELeft= x;
+        ERight = x+size;
     }
 
     public PApplet draw(PApplet s) {
@@ -42,5 +46,21 @@ public class Enemy {
         } else {
             return this.respawn();
         }
+    }
+    
+    public double EL() {
+    	return this.ELeft;
+    }
+    
+    public double ET() {
+    	return this.ETop;
+    }
+    
+    public double EB() {
+    	return this.EBot;
+    }
+    
+    public double ER() {
+    	return this.ERight;
     }
 }
