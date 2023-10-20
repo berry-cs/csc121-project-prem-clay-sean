@@ -9,30 +9,42 @@ import processing.event.MouseEvent;
  */
 public class SquareEvade {
 
-	// Enemy[] eList = {e1,e2,e3};
+	int numC;
 	int numEnemies;
 	Player p;
 	Enemy eList[];
-	int score;
-	// int lives;
+	Collect cList[];
+
+	boolean isPlaying;
+
 
 	public SquareEvade() {
-		numEnemies = 5;
+		numEnemies = 3;
+		numC = 2;
 		p = new Player();
 		eList = new Enemy[numEnemies];
-		score = 0;
+		cList = new Collect[numC];
+		isPlaying = true;
 		// lives = p.returnLives();
 
 		for (int i = 0; i < numEnemies; i++) {
 			eList[i] = new Enemy();
 		}
+		
+		for (int i = 0; i < numC; i++) {
+			cList[i] = new Collect();
+		}
+		
 	}
 
-	public SquareEvade(int numEnemies, Player p, Enemy eList[]) {
+	public SquareEvade(int numEnemies, Player p, Enemy eList[], int numC, Collect cList[]) {
 		this.numEnemies = numEnemies;
 		this.p = p;
 		this.eList = eList;
-		this.score = 0;
+		this.numC= numC;
+		this.cList = cList;
+		isPlaying = true;
+		
 		// this.lives = 5;
 	}
 
@@ -42,13 +54,23 @@ public class SquareEvade {
 	public PApplet draw(PApplet c) {
 		c.background(42);
 		c.textSize(25);
-		c.text("Score: " + this.score, 20, 40);
-		c.text("Lives: " + p.returnLives(), 300, 40);
+		c.text("Score: " + this.p.returnScore(), 20, 40);
+		c.text("Lives: " + this.p.returnLives(), 300, 40);
 
 		for (int i = 0; i < eList.length; i++) {
 			this.eList[i].draw(c);
 		}
+		for (int i = 0; i < cList.length; i++) {
+			this.cList[i].draw(c);
+		}
 		p.draw(c);
+		System.out.println(isPlaying);
+		
+    	if(this.p.returnLives() <= 0 ) {
+    		isPlaying = false;
+    		c.text("Game Over", 200, 200);
+
+    	}
 		return c;
 	}
 
@@ -63,27 +85,38 @@ public class SquareEvade {
 		Player updatedP = this.p;
 
 		Enemy updatedEnemies[] = new Enemy[numEnemies];
+		Collect updatedCollects[] = new Collect[numC];
+		
+		
+		
+		if(this.isPlaying == true) {
 		
 		for (int i = 0; i < numEnemies; i++) {
 			updatedEnemies[i] = this.eList[i].fallDown();
-		}
+			if (this.p.collisionE(eList[i])) {
+			this.p.loseALife();
+			updatedEnemies[i]= this.eList[i].respawn();
+	    	//System.out.println(eList[i]);
 
-//		for (int i = 0; i < numEnemies; i++) {
-//			if (updatedP.collision(updatedEnemies[i]) && !isInGracePeriod) {
-//				updatedP.loseALife();
-//				//isInGracePeriod = false;
-//			}
-//
-//		}
-		for (int i = 0; i < numEnemies; i++) {
-			if (this.p.collision(updatedEnemies[i])) {
-				this.p.loseALife();
-				//isInGracePeriod = false;
 			}
-
 		}
-		return new SquareEvade(numEnemies, updatedP, updatedEnemies);
+		for (int i = 0; i < numC; i++) {
+			updatedCollects[i] = this.cList[i].fallDown();
+			if (this.p.collisionC(cList[i])) {
+			System.out.println("collect");
+			this.p.addPoint();
+			updatedCollects[i]= this.cList[i].respawn();
+	    	//System.out.println(eList[i]);
 
+			}
+		}
+
+		return new SquareEvade(numEnemies, updatedP, updatedEnemies, numC, updatedCollects);
+
+	}
+		else {
+			return this;
+		}
 	}
 
 	/**
@@ -99,25 +132,36 @@ public class SquareEvade {
 	 * controls the movement of the player using arrow keys
 	 */
 	public SquareEvade keyPressed(KeyEvent kev) {
+		if(this.isPlaying == true) {
 		if (kev.getKeyCode() == PApplet.RIGHT) {
 			Enemy updatedEnemies[] = new Enemy[numEnemies];
 			for (int i = 0; i < numEnemies; i++) {
 				updatedEnemies[i] = this.eList[i].fallDown();
 			}
-			return new SquareEvade(numEnemies, p.moveR(), updatedEnemies);
+			Collect updatedCollects[] = new Collect[numC];
+			for (int i = 0; i < numC; i++) {
+				updatedCollects[i] = this.cList[i].fallDown();
+			}
+			return new SquareEvade(numEnemies, p.moveR(), updatedEnemies,numC,updatedCollects );
 		}
 
 		else if (kev.getKeyCode() == PApplet.LEFT) {
 			Enemy updatedEnemies[] = new Enemy[numEnemies];
 			for (int i = 0; i < numEnemies; i++) {
 				updatedEnemies[i] = this.eList[i].fallDown();
+				
 			}
-			return new SquareEvade(numEnemies, p.moveL(), updatedEnemies);
+			Collect updatedCollects[] = new Collect[numC];
+				for (int i = 0; i < numC; i++) {
+					updatedCollects[i] = this.cList[i].fallDown();
+				}
+				return new SquareEvade(numEnemies, p.moveL(), updatedEnemies,numC,updatedCollects );
 		} else {
 			return this;
 		}
-		// return new SquareEvade(e1.fallDown(), e2.fallDown(), e3.fallDown(),
-		// p.move());
+
+	}
+		else { return this;}
 	}
 
 }

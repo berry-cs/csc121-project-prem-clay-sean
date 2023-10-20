@@ -5,7 +5,7 @@ public class Enemy {
     double x;
     double y;
     double fallRate = 5;
-    int size = 15;
+    int size = 20;
     
     //hitbox vars
     double ETop;
@@ -14,7 +14,7 @@ public class Enemy {
     double ERight;
     
     public Enemy() {
-        this (Math.random()*400+1,  Math.random()*(-500));
+        this (Math.random()*(375)+1,  Math.random()*(-500));
     }
     
     public Enemy(double x, double y) {
