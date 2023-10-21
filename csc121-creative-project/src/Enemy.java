@@ -2,16 +2,16 @@ import processing.core.*;
 
 public class Enemy {
     
-    double x;
-    double y;
-    double fallRate = 5;
-    int size = 20;
+   private double x;
+   private double y;
+   private double fallRate = 5;
+   private int size = 20;
     
     //hitbox vars
-    double ETop;
-    double EBot;
-    double ELeft;
-    double ERight;
+   private double ETop;
+   private double EBot;
+   private double ELeft;
+   private double ERight;
     
     public Enemy() {
         this (Math.random()*(375)+1,  Math.random()*(-500));

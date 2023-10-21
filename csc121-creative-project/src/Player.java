@@ -8,24 +8,29 @@ import processing.core.*;
 
 public class Player {
 
-	double x = 200;
-	double y = 350;
-	int moveRate = 5;
-	int size = 25;
-	int lives = 5;
-	int score =0;
+	private double x = 200;
+	private double y = 350;
+	private int moveRate = 5;
+	private int size = 25;
+	private int lives = 5;
+	private int score =0;
 	
     //hitbox vars
-    double pTop;
-    double pBot;
-    double pLeft;
-    double pRight;
-    boolean movingLeft;
-    boolean movingRight;
+	private double pTop;
+	private double pBot;
+	private double pLeft;
+	private double pRight;
+	private boolean movingLeft;
+	private boolean movingRight;
 	
     public Player() {
     	//this.lives=5;
-        
+    	this.x = 200;
+    	this.y = 350;
+    	this.moveRate = 5;
+    	this.size = 25;
+    	this.lives = 5;
+    	this.score =0;
 
     }
     

@@ -9,13 +9,13 @@ import processing.event.MouseEvent;
  */
 public class SquareEvade {
 
-	int numC;
-	int numEnemies;
-	Player p;
-	Enemy eList[];
-	Collect cList[];
+	private int numC;
+	private int numEnemies;
+	private Player p;
+	private Enemy eList[];
+	private Collect cList[];
 
-	boolean isPlaying;
+	private boolean isPlaying;
 
 
 	public SquareEvade() {
@@ -82,7 +82,7 @@ public class SquareEvade {
 
 		//boolean isInGracePeriod = false;
 
-		this.p.updateP();
+		
 
 		Enemy updatedEnemies[] = new Enemy[numEnemies];
 		Collect updatedCollects[] = new Collect[numC];
@@ -93,7 +93,7 @@ public class SquareEvade {
 
 			for (int i = 0; i < numEnemies; i++) {
 				updatedEnemies[i] = this.eList[i].fallDown();
-				if (this.p.collisionE(eList[i])) {
+				if (this.p.collisionE(updatedEnemies[i])) {
 					this.p.loseALife();
 					updatedEnemies[i]= this.eList[i].respawn();
 					//System.out.println(eList[i]);
@@ -102,7 +102,7 @@ public class SquareEvade {
 			}
 			for (int i = 0; i < numC; i++) {
 				updatedCollects[i] = this.cList[i].fallDown();
-				if (this.p.collisionC(cList[i])) {
+				if (this.p.collisionC(updatedCollects[i])) {
 					System.out.println("collect");
 					this.p.addPoint();
 					updatedCollects[i]= this.cList[i].respawn();
@@ -110,7 +110,7 @@ public class SquareEvade {
 
 				}
 			}
-			
+			this.p.updateP();
 			this.eList = updatedEnemies;
 			this.cList = updatedCollects;
 
