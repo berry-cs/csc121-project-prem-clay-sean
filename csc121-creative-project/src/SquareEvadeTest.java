@@ -26,6 +26,7 @@ class SquareEvadeTest {
     	p1.addPoint();
     	p1.addPoint();
     	assertEquals(4,p1.returnScore());
+    	
 
     }
 

@@ -110,6 +110,7 @@ public class SquareEvade {
 
 				}
 			}
+			
 			this.p.updateP();
 			this.eList = updatedEnemies;
 			this.cList = updatedCollects;

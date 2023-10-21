@@ -31,6 +31,10 @@ public class Player {
     	this.size = 25;
     	this.lives = 5;
     	this.score =0;
+		 this.pTop = this.y - size/2;
+		 this.pBot = this.y+size/2;
+		 this.pLeft = this.x - size/2;
+		 this.pRight = this.x+size/2;
 
     }
     
@@ -39,10 +43,10 @@ public class Player {
 		this.y = y;
 		this.lives = lives;
 		this.score = score;
-		 pTop = y - size/2;
-		 pBot = y+size/2;
-		 pLeft = x - size/2;
-		 pRight = x+size/2;
+		 this.pTop = this.y - size/2;
+		 this.pBot = this.y+size/2;
+		 this.pLeft = this.x - size/2;
+		 this.pRight = this.x+size/2;
 		 
 	}
 
@@ -54,17 +58,17 @@ public class Player {
     }
 	
 	//moves player to the right
-    public Player moveR() {
-
-        return new Player (this.x + this.moveRate, this.y, this.lives, this.score);
-    }
-	
-    //moves player to the left
-    public Player moveL() {
-        
-        return new Player (this.x - this.moveRate, this.y, this.lives,this.score);
-    }
-    
+//    public Player moveR() {
+//
+//        return new Player (this.x + this.moveRate, this.y, this.lives, this.score);
+//    }
+//	
+//    //moves player to the left
+//    public Player moveL() {
+//        
+//        return new Player (this.x - this.moveRate, this.y, this.lives,this.score);
+//    }
+//    
 
     public Player keyHandle(processing.event.KeyEvent kev) {
 
@@ -79,7 +83,7 @@ public class Player {
 		this.movingRight = false;
 		this.movingLeft = true;
 	}
-	//System.out.println(this.movingRight);
+	//System.out.println(this.pLeft);
 	return this;
     }
     
@@ -94,17 +98,24 @@ public class Player {
 
 	}
 
+	//updates the position of the player
     public Player updateP() {
-    	
-    	
 
 	if(this.movingLeft == true) {
 		this.x-=moveRate;
+		 this.pLeft -= moveRate;
+			this.pRight -= moveRate;
+
+
 	}
 	
 	if(this.movingRight == true) {
 		this.x+=moveRate;
+		this.pRight += moveRate;
+		this.pLeft += moveRate;
 	}
+	System.out.println(this.pLeft);
+	 
 	return this;
 }
     //handles collision with enemy
@@ -115,6 +126,8 @@ public class Player {
     			&& this.pBot > e.ET() && this.pTop < e.EB());
     	
     	}
+    
+    // checks collision of clayer with a Colect
     public boolean collisionC(Collect c) {
 
     	return (this.pRight  > c.CL() && this.pLeft < c.CR() 
@@ -122,18 +135,24 @@ public class Player {
     	
     	}
     
+    //subtracts a life
     public void loseALife() {
     	this.lives -= 1;
     	System.out.println("LOST A LIFE");
     }
+    
+    //adds a point to player score
     public void addPoint() {
     	this.score++;
     	System.out.println("Score");
     }
     
+    //return player lives
 	public int returnLives() {
 		return this.lives;
 	}
+	
+	//returns the score
 	public int returnScore() {
 		return this.score;
 	}
