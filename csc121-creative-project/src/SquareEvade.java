@@ -30,11 +30,11 @@ public class SquareEvade {
 		for (int i = 0; i < numEnemies; i++) {
 			eList[i] = new Enemy();
 		}
-		
+
 		for (int i = 0; i < numC; i++) {
 			cList[i] = new Collect();
 		}
-		
+
 	}
 
 	public SquareEvade(int numEnemies, Player p, Enemy eList[], int numC, Collect cList[]) {
@@ -44,7 +44,7 @@ public class SquareEvade {
 		this.numC= numC;
 		this.cList = cList;
 		isPlaying = true;
-		
+
 		// this.lives = 5;
 	}
 
@@ -64,13 +64,13 @@ public class SquareEvade {
 			this.cList[i].draw(c);
 		}
 		p.draw(c);
-		System.out.println(isPlaying);
-		
-    	if(this.p.returnLives() <= 0 ) {
-    		isPlaying = false;
-    		c.text("Game Over", 200, 200);
 
-    	}
+
+		if(this.p.returnLives() <= 0 ) {
+			isPlaying = false;
+			c.text("Game Over", 200, 200);
+
+		}
 		return c;
 	}
 
@@ -79,41 +79,43 @@ public class SquareEvade {
 	 * and if prompted by the user the player to the left or right
 	 */
 	public SquareEvade update() {
-		
+
 		//boolean isInGracePeriod = false;
-		
-		Player updatedP = this.p;
+
+		this.p.updateP();
 
 		Enemy updatedEnemies[] = new Enemy[numEnemies];
 		Collect updatedCollects[] = new Collect[numC];
-		
-		
-		
+
+
+
 		if(this.isPlaying == true) {
-		
-		for (int i = 0; i < numEnemies; i++) {
-			updatedEnemies[i] = this.eList[i].fallDown();
-			if (this.p.collisionE(eList[i])) {
-			this.p.loseALife();
-			updatedEnemies[i]= this.eList[i].respawn();
-	    	//System.out.println(eList[i]);
 
+			for (int i = 0; i < numEnemies; i++) {
+				updatedEnemies[i] = this.eList[i].fallDown();
+				if (this.p.collisionE(eList[i])) {
+					this.p.loseALife();
+					updatedEnemies[i]= this.eList[i].respawn();
+					//System.out.println(eList[i]);
+
+				}
 			}
-		}
-		for (int i = 0; i < numC; i++) {
-			updatedCollects[i] = this.cList[i].fallDown();
-			if (this.p.collisionC(cList[i])) {
-			System.out.println("collect");
-			this.p.addPoint();
-			updatedCollects[i]= this.cList[i].respawn();
-	    	//System.out.println(eList[i]);
+			for (int i = 0; i < numC; i++) {
+				updatedCollects[i] = this.cList[i].fallDown();
+				if (this.p.collisionC(cList[i])) {
+					System.out.println("collect");
+					this.p.addPoint();
+					updatedCollects[i]= this.cList[i].respawn();
+					//System.out.println(eList[i]);
 
+				}
 			}
+			
+			this.eList = updatedEnemies;
+			this.cList = updatedCollects;
+
+			return this;
 		}
-
-		return new SquareEvade(numEnemies, updatedP, updatedEnemies, numC, updatedCollects);
-
-	}
 		else {
 			return this;
 		}
@@ -132,36 +134,15 @@ public class SquareEvade {
 	 * controls the movement of the player using arrow keys
 	 */
 	public SquareEvade keyPressed(KeyEvent kev) {
-		if(this.isPlaying == true) {
-		if (kev.getKeyCode() == PApplet.RIGHT) {
-			Enemy updatedEnemies[] = new Enemy[numEnemies];
-			for (int i = 0; i < numEnemies; i++) {
-				updatedEnemies[i] = this.eList[i].fallDown();
-			}
-			Collect updatedCollects[] = new Collect[numC];
-			for (int i = 0; i < numC; i++) {
-				updatedCollects[i] = this.cList[i].fallDown();
-			}
-			return new SquareEvade(numEnemies, p.moveR(), updatedEnemies,numC,updatedCollects );
-		}
-
-		else if (kev.getKeyCode() == PApplet.LEFT) {
-			Enemy updatedEnemies[] = new Enemy[numEnemies];
-			for (int i = 0; i < numEnemies; i++) {
-				updatedEnemies[i] = this.eList[i].fallDown();
-				
-			}
-			Collect updatedCollects[] = new Collect[numC];
-				for (int i = 0; i < numC; i++) {
-					updatedCollects[i] = this.cList[i].fallDown();
-				}
-				return new SquareEvade(numEnemies, p.moveL(), updatedEnemies,numC,updatedCollects );
-		} else {
-			return this;
-		}
-
-	}
-		else { return this;}
-	}
+		this.p = this.p.keyHandle(kev);
+		return this;
 
 }
+	public SquareEvade keyReleased(KeyEvent kev) {
+		this.p = this.p.keyRelease(kev);
+		return this;
+
+	}
+}
+
+

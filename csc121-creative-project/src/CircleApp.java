@@ -28,6 +28,11 @@ public class CircleApp extends PApplet {
     public void keyPressed(KeyEvent kev) {
          w = w.keyPressed(kev);
     }
+    
+    public void keyReleased(KeyEvent kev) {
+        w = w.keyReleased(kev);
+   }
+   
 
     public static void main(String[] args) {
         PApplet.runSketch(new String[] { "CircleApp" }, new CircleApp());

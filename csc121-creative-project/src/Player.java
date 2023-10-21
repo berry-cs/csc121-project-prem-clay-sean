@@ -1,6 +1,7 @@
 import java.awt.Desktop.Action;
+import java.awt.event.KeyEvent;
 import java.util.Timer;
-
+import processing.core.PApplet;
 import processing.core.*;
 
 
@@ -9,7 +10,7 @@ public class Player {
 
 	double x = 200;
 	double y = 350;
-	int moveRate = 20;
+	int moveRate = 5;
 	int size = 25;
 	int lives = 5;
 	int score =0;
@@ -19,6 +20,8 @@ public class Player {
     double pBot;
     double pLeft;
     double pRight;
+    boolean movingLeft;
+    boolean movingRight;
 	
     public Player() {
     	//this.lives=5;
@@ -57,15 +60,58 @@ public class Player {
         return new Player (this.x - this.moveRate, this.y, this.lives,this.score);
     }
     
+
+    public Player keyHandle(processing.event.KeyEvent kev) {
+
+	
+	if (kev.getKeyCode() == PApplet.RIGHT) {
+		this.movingRight = true;
+		this.movingLeft = false;
+		
+	}
+
+	if(kev.getKeyCode() == PApplet.LEFT) {
+		this.movingRight = false;
+		this.movingLeft = true;
+	}
+	//System.out.println(this.movingRight);
+	return this;
+    }
+    
+	public Player keyRelease(processing.event.KeyEvent kev) {
+		if(kev.getKeyCode() == PApplet.LEFT) {
+			this.movingLeft = false;
+		}
+		if(kev.getKeyCode() == PApplet.RIGHT) {
+			this.movingRight = false;
+		}
+		return this;
+
+	}
+
+    public Player updateP() {
+    	
+    	
+
+	if(this.movingLeft == true) {
+		this.x-=moveRate;
+	}
+	
+	if(this.movingRight == true) {
+		this.x+=moveRate;
+	}
+	return this;
+}
     //handles collision with enemy
     public boolean collisionE(Enemy e) {
     	
+
     	return (this.pRight  > e.EL() && this.pLeft < e.ER() 
     			&& this.pBot > e.ET() && this.pTop < e.EB());
     	
     	}
     public boolean collisionC(Collect c) {
-    	
+
     	return (this.pRight  > c.CL() && this.pLeft < c.CR() 
     			&& this.pBot > c.CT() && this.pTop < c.CB());
     	
@@ -73,7 +119,7 @@ public class Player {
     
     public void loseALife() {
     	this.lives -= 1;
-    	//System.out.println("LOST A LIFE");
+    	System.out.println("LOST A LIFE");
     }
     public void addPoint() {
     	this.score++;
@@ -86,6 +132,8 @@ public class Player {
 	public int returnScore() {
 		return this.score;
 	}
+
+
 
 	
 }
