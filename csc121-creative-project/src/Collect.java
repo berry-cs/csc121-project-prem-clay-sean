@@ -1,7 +1,9 @@
 import processing.core.PApplet;
 
 public class Collect {
-    
+    int red;
+    int green;
+    int blue;
     double x;
     double y;
     double fallRate = 5;
@@ -14,21 +16,26 @@ public class Collect {
     double CRight;
     
     public Collect() {
-        this (Math.random()*(375)+1,  Math.random()*(-500));
+        this (Math.random()*(375)+1,  Math.random()*(-500), 255,0,0);
     }
     
-    public Collect(double x, double y) {
+    public Collect(double x, double y, int red, int green, int blue) {
         this.x = x;
         this.y = y;
         
-        CTop = y;
-        CBot = y+size;
-        CLeft= x;
-        CRight = x+size;
+        this.CTop = y;
+        this.CBot = y+size;
+        this.CLeft= x;
+        this.CRight = x+size;
+        
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+        
     }
 
     public PApplet draw(PApplet s) {
-        s.fill(255, 0, 0);
+        s.fill(this.red, this.green, this.blue);
         s.square((int)this.x, (int)this.y, size);
 
         return s;
@@ -36,13 +43,13 @@ public class Collect {
     
     /** makes the Collect reappear at a random x along the top */
     public Collect respawn() {
-        return new Collect((Math.random()*400+1), 0);
+        return new Collect((Math.random()*400+1), 0,this.red,this.green, this.blue);
     }
     
     /** moves the Collect down or respawns when it hits the bottom */
     public Collect fallDown() {
         if (this.y < 400) {
-            return new Collect(this.x, this.y + this.fallRate);
+            return new Collect(this.x, this.y + this.fallRate,this.red,this.green, this.blue);
         } else {
             return this.respawn();
         }
@@ -63,4 +70,31 @@ public class Collect {
     public double CR() {
     	return this.CRight;
     }
+    public int getR() {
+    	return this.red;
+    }
+    public int getG() {
+    	return this.green;
+    }
+    public int getB() {
+    	return this.blue;
+    }
+    
+    public void changeColorR(Player p) {
+    	
+        this.red = (int) (Math.random()*(255)+50);
+        this.green = (int) (Math.random()*(255)+50);
+        this.blue = (int) (Math.random()*(255)+50);
+    
+    	//System.out.println(this.red);
+    }
+    public void changeColorS(int r, int g, int b) {
+    	
+        this.red = r;
+        this.green = g;
+        this.blue = b;
+    
+    	//System.out.println(this.red);
+    }
+    
 }

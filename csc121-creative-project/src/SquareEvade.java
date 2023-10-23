@@ -52,7 +52,7 @@ public class SquareEvade {
 	 * Renders a picture of an array of square, circle player, and the score/lives
 	 */
 	public PApplet draw(PApplet c) {
-		c.background(42);
+		c.background(10);
 		c.textSize(25);
 		c.text("Score: " + this.p.returnScore(), 20, 40);
 		c.text("Lives: " + this.p.returnLives(), 300, 40);
@@ -63,6 +63,18 @@ public class SquareEvade {
 		for (int i = 0; i < cList.length; i++) {
 			this.cList[i].draw(c);
 		}
+		
+		
+		p.getColor(this.cList[0]);
+
+		if(this.p.returnScore()%5 == 0 && this.p.returnScore()>0) {
+			
+			for (int i = 0; i < cList.length; i++) {
+				this.cList[i].changeColorR(p);
+			}
+			p.getColor(this.cList[0]);
+			this.p.addPoint();
+		}
 		p.draw(c);
 
 
@@ -71,6 +83,8 @@ public class SquareEvade {
 			c.text("Game Over", 200, 200);
 
 		}
+		
+		//System.out.println(this.cList.length);
 		return c;
 	}
 

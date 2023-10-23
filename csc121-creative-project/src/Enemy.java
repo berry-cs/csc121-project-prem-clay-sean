@@ -28,7 +28,7 @@ public class Enemy {
     }
 
     public PApplet draw(PApplet s) {
-        s.fill(0, 0, 255);
+        s.fill(69, 69, 69);
         s.square((int)this.x, (int)this.y, size);
 
         return s;

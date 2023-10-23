@@ -23,6 +23,11 @@ public class Player {
 	private boolean movingLeft;
 	private boolean movingRight;
 	
+	private int red;
+	private int green;
+	private int blue;
+	
+	
     public Player() {
     	//this.lives=5;
     	this.x = 200;
@@ -35,6 +40,7 @@ public class Player {
 		 this.pBot = this.y+size/2;
 		 this.pLeft = this.x - size/2;
 		 this.pRight = this.x+size/2;
+
 
     }
     
@@ -51,24 +57,18 @@ public class Player {
 	}
 
 	public PApplet draw(PApplet c) {
-        c.fill(255, 0, 0);
+        c.fill(this.red, this.blue, this.green);
         c.circle((int)this.x, (int)this.y, this.size);
 
         return c;
     }
 	
-	//moves player to the right
-//    public Player moveR() {
-//
-//        return new Player (this.x + this.moveRate, this.y, this.lives, this.score);
-//    }
-//	
-//    //moves player to the left
-//    public Player moveL() {
-//        
-//        return new Player (this.x - this.moveRate, this.y, this.lives,this.score);
-//    }
-//    
+	public void getColor(Collect c) {
+		this.red = c.getR();
+		this.green = c.getG();
+		this.blue = c.getB();
+
+	}
 
     public Player keyHandle(processing.event.KeyEvent kev) {
 
@@ -114,7 +114,7 @@ public class Player {
 		this.pRight += moveRate;
 		this.pLeft += moveRate;
 	}
-	System.out.println(this.pLeft);
+	//System.out.println(this.pLeft);
 	 
 	return this;
 }
