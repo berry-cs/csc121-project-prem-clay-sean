@@ -55,6 +55,7 @@ public class Collect {
         }
     }
     
+    /**returns the hitbox Vars */
     public double CL() {
     	return this.CLeft;
     }
@@ -70,6 +71,9 @@ public class Collect {
     public double CR() {
     	return this.CRight;
     }
+    
+    
+    /** returns values for the color vars */
     public int getR() {
     	return this.red;
     }
@@ -80,21 +84,14 @@ public class Collect {
     	return this.blue;
     }
     
-    public void changeColorR(Player p) {
+    
+    public void changeColor() {
     	
-        this.red = (int) (Math.random()*(255)+50);
-        this.green = (int) (Math.random()*(255)+50);
-        this.blue = (int) (Math.random()*(255)+50);
+        this.red = (int) (Math.random()*(255)+70);
+        this.green = (int) (Math.random()*(255)+70);
+        this.blue = (int) (Math.random()*(255)+70);
     
     	//System.out.println(this.red);
     }
-    public void changeColorS(int r, int g, int b) {
-    	
-        this.red = r;
-        this.green = g;
-        this.blue = b;
-    
-    	//System.out.println(this.red);
-    }
-    
+
 }

@@ -70,7 +70,7 @@ public class SquareEvade {
 		if(this.p.returnScore()%5 == 0 && this.p.returnScore()>0) {
 			
 			for (int i = 0; i < cList.length; i++) {
-				this.cList[i].changeColorR(p);
+				this.cList[i].changeColor();
 			}
 			p.getColor(this.cList[0]);
 			this.p.addPoint();
