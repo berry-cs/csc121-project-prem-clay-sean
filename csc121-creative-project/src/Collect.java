@@ -6,7 +6,7 @@ public class Collect {
     int blue;
     double x;
     double y;
-    double fallRate = 5;
+    double fallRate;
     int size = 20;
     
     //hitbox vars
@@ -16,10 +16,10 @@ public class Collect {
     double CRight;
     
     public Collect() {
-        this (Math.random()*(375)+1,  Math.random()*(-500), 255,0,0);
+        this (Math.random()*(375)+1,  Math.random()*(-500), 255,0,0,5);
     }
     
-    public Collect(double x, double y, int red, int green, int blue) {
+    public Collect(double x, double y, int red, int green, int blue, double fallRate) {
         this.x = x;
         this.y = y;
         
@@ -31,6 +31,7 @@ public class Collect {
         this.red = red;
         this.green = green;
         this.blue = blue;
+        this.fallRate = fallRate;
         
     }
 
@@ -43,16 +44,24 @@ public class Collect {
     
     /** makes the Collect reappear at a random x along the top */
     public Collect respawn() {
-        return new Collect((Math.random()*400+1), 0,this.red,this.green, this.blue);
+        return new Collect((Math.random()*400+1), Math.random()*(-300),this.red,this.green, this.blue,this.fallRate);
     }
     
     /** moves the Collect down or respawns when it hits the bottom */
     public Collect fallDown() {
         if (this.y < 400) {
-            return new Collect(this.x, this.y + this.fallRate,this.red,this.green, this.blue);
+            return new Collect(this.x, this.y + this.fallRate,this.red,this.green, this.blue, this.fallRate);
         } else {
             return this.respawn();
         }
+    }
+    
+    public void speedUp() {
+    	this.fallRate+=.5;
+    }
+    
+    public void resetSpeed() {
+    	this.fallRate = 5;
     }
     
     /**returns the hitbox Vars */

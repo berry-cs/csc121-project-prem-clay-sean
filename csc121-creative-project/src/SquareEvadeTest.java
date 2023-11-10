@@ -7,8 +7,8 @@ import processing.event.*;
 class SquareEvadeTest {
 
     SquareEvade cw1 = new SquareEvade();
-    Enemy e1 = new Enemy(200,200);
-    Enemy e2 = new Enemy(300,300);
+    Enemy e1 = new Enemy(200,200,5);
+    Enemy e2 = new Enemy(300,300,5);
     Player p1 = new Player(305,305,5,0);
     
     

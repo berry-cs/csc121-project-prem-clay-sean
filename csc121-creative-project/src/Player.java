@@ -12,7 +12,7 @@ public class Player {
 	private double y = 350;
 	private int moveRate = 5;
 	private int size = 25;
-	private int lives = 5;
+	private int lives;
 	private int score =0;
 	
     //hitbox vars
@@ -141,6 +141,12 @@ public class Player {
     	System.out.println("LOST A LIFE");
     }
     
+    public void gainALife() {
+    	if(this.lives < 5) {
+    	this.lives++;
+    	}
+    }
+    
     //adds a point to player score
     public void addPoint() {
     	this.score++;
@@ -155,6 +161,11 @@ public class Player {
 	//returns the score
 	public int returnScore() {
 		return this.score;
+	}
+	
+	public void resetP() {
+		this.lives = 5;
+		this.score = 0;
 	}
 
 

@@ -14,17 +14,19 @@ public class Enemy {
    private double ERight;
     
     public Enemy() {
-        this (Math.random()*(375)+1,  Math.random()*(-500));
+        this (Math.random()*(375)+1,  Math.random()*(-500),5);
     }
     
-    public Enemy(double x, double y) {
+    public Enemy(double x, double y, double fallRate) {
         this.x = x;
         this.y = y;
+        this.fallRate = fallRate;
         
         ETop = y;
         EBot = y+size;
         ELeft= x;
         ERight = x+size;
+        
     }
 
     public PApplet draw(PApplet s) {
@@ -36,16 +38,24 @@ public class Enemy {
     
     /** makes the enemy reappear at a random x along the top */
     public Enemy respawn() {
-        return new Enemy((Math.random()*400+1), 0);
+        return new Enemy((Math.random()*400+1), Math.random()*(-300), this.fallRate);
     }
     
     /** moves the enemy down or respawns when it hits the bottom */
     public Enemy fallDown() {
         if (this.y < 400) {
-            return new Enemy(this.x, this.y + this.fallRate);
+            return new Enemy(this.x, this.y + this.fallRate, this.fallRate);
         } else {
             return this.respawn();
         }
+    }
+    
+    public void speedUp() {
+    	this.fallRate+= .5;
+    }
+    
+    public void resetSpeed() {
+    	this.fallRate = 5;
     }
     
     public double EL() {
