@@ -105,32 +105,7 @@ public class SquareEvade {
 			}
 			
 
-			if(this.p.returnScore()%5 == 0 && this.p.returnScore()>0 && upgradeReady) {
-				
-				for (int i = 0; i < cList.length; i++) {
-					this.cList[i].speedUp();
-				}
-				
-				for (int i = 0; i < eList.length; i++) {
-					this.eList[i].speedUp();
-				}
-				upgradeReady = false;
 
-			}
-			
-			if(this.p.returnScore()%6 == 0 && this.p.returnScore()>0 && upgradeReady == false) {
-				upgradeReady = true;
-			}
-			
-			if(this.p.returnScore()%10 == 0 && this.p.returnScore()>0 && upgradeReady2) {
-				this.p.gainALife();
-				upgradeReady2 = false;
-				
-			}
-			
-			if(this.p.returnScore()%11 == 0 && this.p.returnScore()>0 && upgradeReady2 == false) {
-				upgradeReady2 = true;
-			}
 			
 	    	System.out.println(this.cList[1].fallRate);
 			p.draw(c);
@@ -165,6 +140,41 @@ public class SquareEvade {
 
 		switch(state) {
 		case 1:
+			
+			
+			if(this.p.returnScore()%5 == 0 && this.p.returnScore()>0 && upgradeReady) {
+				
+				for (int i = 0; i < cList.length; i++) {
+					this.cList[i].speedUp();
+				}
+				
+				for (int i = 0; i < eList.length; i++) {
+					this.eList[i].speedUp();
+				}
+				upgradeReady = false;
+
+			}
+			
+			if(this.p.returnScore()%6 == 0 && this.p.returnScore()>0 && upgradeReady == false) {
+				upgradeReady = true;
+			}
+			
+			if(this.p.returnScore()%6 == 0 && this.p.returnScore()%5 == 0 && this.p.returnScore()>0 && upgradeReady) {
+				upgradeReady = false;
+			}
+			
+			
+			if(this.p.returnScore()%10 == 0 && this.p.returnScore()>0 && upgradeReady2) {
+				this.p.gainALife();
+				upgradeReady2 = false;
+				
+			}
+			
+			if(this.p.returnScore()%11 == 0 && this.p.returnScore()>0 && upgradeReady2 == false) {
+				upgradeReady2 = true;
+			}
+			
+			
 			Enemy updatedEnemies[] = new Enemy[numEnemies];
 			Collect updatedCollects[] = new Collect[numC];
 			
