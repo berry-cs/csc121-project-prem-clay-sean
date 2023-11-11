@@ -17,6 +17,7 @@ public class SquareEvade {
 	private int state;
 	private boolean upgradeReady = true;
 	private boolean upgradeReady2 = true;
+	private String pName;
 
 
 
@@ -256,6 +257,10 @@ public class SquareEvade {
 		this.p = this.p.keyRelease(kev);
 		return this;
 
+	}
+	
+	public String getPlayer() {
+		return this.pName;
 	}
 }
 

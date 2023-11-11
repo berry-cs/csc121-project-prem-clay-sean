@@ -1,5 +1,6 @@
 import processing.core.*;
 import processing.event.*;
+import javax.swing.JOptionPane;
 
 /**
  * Provides the scaffolding to launch a Processing application
@@ -35,6 +36,15 @@ public class CircleApp extends PApplet {
    
 
     public static void main(String[] args) {
+    	
         PApplet.runSketch(new String[] { "CircleApp" }, new CircleApp());
+        
+        String name; 
+        name = JOptionPane.showInputDialog("Please enter your name"); 
+        
+        String msg = "Hello " + name + "!"; 
+        JOptionPane.showMessageDialog(null, msg);
     }
+    
+
 }
