@@ -42,7 +42,7 @@ public class CircleApp extends PApplet {
         String name; 
         name = JOptionPane.showInputDialog("Please enter your name"); 
         
-        String msg = "Hello " + name + "!"; 
+        String msg = "Hello Player " + name + "!"; 
         JOptionPane.showMessageDialog(null, msg);
     }
     
