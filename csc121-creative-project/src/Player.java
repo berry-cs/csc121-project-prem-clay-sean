@@ -14,6 +14,7 @@ public class Player {
 	private int size = 25;
 	private int lives;
 	private int score =0;
+	private int highScore;
 	
     //hitbox vars
 	private double pTop;
@@ -40,6 +41,7 @@ public class Player {
 		 this.pBot = this.y+size/2;
 		 this.pLeft = this.x - size/2;
 		 this.pRight = this.x+size/2;
+		 this.highScore = -1;
 
 
     }
@@ -53,7 +55,8 @@ public class Player {
 		 this.pBot = this.y+size/2;
 		 this.pLeft = this.x - size/2;
 		 this.pRight = this.x+size/2;
-		 
+		 this.highScore = -1;
+
 	}
 
 	public PApplet draw(PApplet c) {
@@ -166,6 +169,14 @@ public class Player {
 	public void resetP() {
 		this.lives = 5;
 		this.score = 0;
+	}
+	
+	public void assignHighScore(int hs) {
+		this.highScore = hs;
+	}
+	
+	public int returnHighScore() {
+		return highScore;
 	}
 
 

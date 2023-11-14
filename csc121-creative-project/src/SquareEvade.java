@@ -262,6 +262,10 @@ public class SquareEvade {
 	public String getPlayer() {
 		return this.pName;
 	}
+	
+	public void assignPlayerHS(int hs) {
+		this.p.assignHighScore(hs);
+	}
 }
 
 
