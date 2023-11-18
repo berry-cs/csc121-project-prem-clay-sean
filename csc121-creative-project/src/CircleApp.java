@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Provides the scaffolding to launch a Processing application
  */
 public class CircleApp extends PApplet {
-	SquareEvade w;
+	static SquareEvade w;
 
 	public void settings() {
 		this.size(400, 400);
@@ -59,7 +59,7 @@ public class CircleApp extends PApplet {
     		int theirIndex = rec.getUserIndex(name);
         	
         	if (theirIndex == -1) {
-        		rec.addInfo(name, 0);
+        		rec.addInfo(name, w.getPlayer().returnHighScore());
         	} else {
         		int playerHS = rec.getScore(theirIndex);
         	}

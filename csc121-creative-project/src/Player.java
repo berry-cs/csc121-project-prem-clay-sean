@@ -15,6 +15,7 @@ public class Player {
 	private int lives;
 	private int score =0;
 	private int highScore;
+	private String username;
 	
     //hitbox vars
 	private double pTop;
@@ -41,7 +42,8 @@ public class Player {
 		 this.pBot = this.y+size/2;
 		 this.pLeft = this.x - size/2;
 		 this.pRight = this.x+size/2;
-		 this.highScore = -1;
+		 this.highScore = 0;
+		 this.username = "";
 
 
     }
@@ -55,7 +57,8 @@ public class Player {
 		 this.pBot = this.y+size/2;
 		 this.pLeft = this.x - size/2;
 		 this.pRight = this.x+size/2;
-		 this.highScore = -1;
+		 this.highScore = 0;
+		 this.username = "";
 
 	}
 
@@ -177,6 +180,10 @@ public class Player {
 	
 	public int returnHighScore() {
 		return highScore;
+	}
+	
+	public void setUsername(String s) {
+		this.username = s;
 	}
 
 

@@ -17,7 +17,6 @@ public class SquareEvade {
 	private int state;
 	private boolean upgradeReady = true;
 	private boolean upgradeReady2 = true;
-	private String pName;
 
 
 
@@ -73,7 +72,8 @@ public class SquareEvade {
 	        c.fill(92,200,128);
 			c.textSize(25);
 	        c.fill(255,0,0);
-			c.text("Collect the colored squares!", 20, 200);
+	        c.text("Collect the colored squares!", 20, 200);
+	        c.text("Press 'SPACE' to Start", 85, 325);
 	        c.fill(92,200,128);
 	        c.square(355,175,25);
 	        c.fill(255,0,0);
@@ -126,6 +126,8 @@ public class SquareEvade {
 			c.textSize(25);
 			c.text("Game Over", 150, 150);
 			c.text("Your Score: "+ this.p.returnScore(), 130,200);;
+			c.text("Press 'SPACE' to restart", 75,275);;
+			c.text("Press 'M' for main menu ", 75,325);;
 			break;
 		
 		}
@@ -215,6 +217,8 @@ public class SquareEvade {
 				this.cList[i] = this.cList[i].respawn();
 			}
 			
+			p.assignHighScore(this.p.returnScore());
+			
 			break;
 		}
 		return this;
@@ -250,6 +254,20 @@ public class SquareEvade {
 				state = 1;}
 			
 		}
+		
+		if(kev.getKeyCode()==77) {
+			if(state == 2) {
+				p.resetP();
+				for (int i = 0; i < cList.length; i++) {
+					this.cList[i].resetSpeed();
+				}
+				
+				for (int i = 0; i < eList.length; i++) {
+					this.eList[i].resetSpeed();
+				}
+				state = 0;
+			}
+		}
 		return this;
 
 }
@@ -259,13 +277,12 @@ public class SquareEvade {
 
 	}
 	
-	public String getPlayer() {
-		return this.pName;
+	public Player getPlayer() {
+		return this.p;
 	}
 	
-	public void assignPlayerHS(int hs) {
-		this.p.assignHighScore(hs);
-	}
+
+	
 }
 
 

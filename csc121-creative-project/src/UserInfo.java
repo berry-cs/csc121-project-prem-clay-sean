@@ -10,9 +10,11 @@ public class UserInfo {
 		scores = new ArrayList<Integer>();
 	}
 	
-	public void addInfo(String un, int s) {
+	public void addInfo(String un, int s ) {
 		this.usernames.add(un);
 		this.scores.add(s);
+//		p.setUsername(un);
+//		p.assignHighScore(s);
 	}
 	
 	public int getScore(int index) {
