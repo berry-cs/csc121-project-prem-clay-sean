@@ -1,5 +1,5 @@
 
-# NAME OF GAME
+# SQUARE EVADE
 
 by *Prem Patel*, *Sean-Anthony Mensah*, *Clay Crawford*
 
