@@ -18,8 +18,7 @@ public class SquareEvade {
 	private boolean upgradeReady = true;
 	private boolean upgradeReady2 = true;
 
-
-
+	/** produces the Enemies and the squares to collect. */
 	public SquareEvade() {
 		numEnemies = 3;
 		numC = 2;
@@ -44,43 +43,39 @@ public class SquareEvade {
 		this.numEnemies = numEnemies;
 		this.p = p;
 		this.eList = eList;
-		this.numC= numC;
+		this.numC = numC;
 		this.cList = cList;
 
-		
-
-		// this.lives = 5;
 	}
 
 	/**
 	 * Renders a picture of an array of square, circle player, and the score/lives
 	 */
 	public PApplet draw(PApplet c) {
-		
-		switch(state) {
+
+		switch (state) {
 		case 0:
-			
+
 			c.background(10);
 			c.textSize(50);
-			c.fill(255,0,0);
+			c.fill(255, 0, 0);
 			c.text("Square Evade", 60, 80);
 			c.textSize(25);
 			c.text("Avoid the grey squares!", 50, 130);
-	        c.fill(69, 69, 69);
-	        c.square(300,105,25);
-	        
-	        c.fill(92,200,128);
-			c.textSize(25);
-	        c.fill(255,0,0);
-	        c.text("Collect the colored squares!", 20, 200);
-	        c.text("Press 'SPACE' to Start", 85, 325);
-	        c.fill(92,200,128);
-	        c.square(355,175,25);
-	        c.fill(255,0,0);
-	        c.square(315,175,25);
+			c.fill(69, 69, 69);
+			c.square(300, 105, 25);
 
-			
+			c.fill(92, 200, 128);
+			c.textSize(25);
+			c.fill(255, 0, 0);
+			c.text("Collect the colored squares!", 20, 200);
+			c.text("Press 'SPACE' to Start", 85, 325);
+			c.fill(92, 200, 128);
+			c.square(355, 175, 25);
+			c.fill(255, 0, 0);
+			c.square(315, 175, 25);
 			break;
+
 		case 1:
 			c.background(10);
 			c.textSize(25);
@@ -92,44 +87,42 @@ public class SquareEvade {
 			for (int i = 0; i < cList.length; i++) {
 				this.cList[i].draw(c);
 			}
-			
-			
+
 			p.getColor(this.cList[0]);
 
-			if(this.p.returnScore()%5 == 0 && this.p.returnScore()>0) {
-				
+			if (this.p.returnScore() % 5 == 0 && this.p.returnScore() > 0) {
+
 				for (int i = 0; i < cList.length; i++) {
 					this.cList[i].changeColor();
 				}
 				p.getColor(this.cList[0]);
-				//this.p.addPoint();
 			}
-			
 
-
-			
-	    	System.out.println(this.cList[1].fallRate);
+			System.out.println(this.cList[1].fallRate);
 			p.draw(c);
 
-
-			if(this.p.returnLives() <= 0 ) {
+			if (this.p.returnLives() <= 0) {
 				state = 2;
 				c.text("Game Over", 200, 200);
 
 			}
 			break;
+
 		case 2:
 			c.background(10);
 			c.textSize(50);
-			c.fill(255,0,0);
+			c.fill(255, 0, 0);
 			c.text("Square Evade", 60, 80);
 			c.textSize(25);
 			c.text("Game Over", 150, 150);
-			c.text("Your Score: "+ this.p.returnScore(), 130,200);;
-			c.text("Press 'SPACE' to restart", 75,275);;
-			c.text("Press 'M' for main menu ", 75,325);;
+			c.text("Your Score: " + this.p.returnScore(), 130, 200);
+			;
+			c.text("Press 'SPACE' to restart", 75, 275);
+			;
+			c.text("Press 'M' for main menu ", 75, 325);
+			;
 			break;
-		
+
 		}
 		return c;
 	}
@@ -140,53 +133,50 @@ public class SquareEvade {
 	 */
 	public SquareEvade update() {
 
+		switch (state) {
 
-		switch(state) {
 		case 1:
-			
-			
-			if(this.p.returnScore()%5 == 0 && this.p.returnScore()>0 && upgradeReady) {
-				
+
+			if (this.p.returnScore() % 5 == 0 && this.p.returnScore() > 0 && upgradeReady) {
+
 				for (int i = 0; i < cList.length; i++) {
 					this.cList[i].speedUp();
 				}
-				
+
 				for (int i = 0; i < eList.length; i++) {
 					this.eList[i].speedUp();
 				}
 				upgradeReady = false;
 
 			}
-			
-			if(this.p.returnScore()%6 == 0 && this.p.returnScore()>0 && upgradeReady == false) {
+
+			if (this.p.returnScore() % 6 == 0 && this.p.returnScore() > 0 && upgradeReady == false) {
 				upgradeReady = true;
 			}
-			
-			if(this.p.returnScore()%6 == 0 && this.p.returnScore()%5 == 0 && this.p.returnScore()>0 && upgradeReady) {
+
+			if (this.p.returnScore() % 6 == 0 && this.p.returnScore() % 5 == 0 && this.p.returnScore() > 0
+					&& upgradeReady) {
 				upgradeReady = false;
 			}
-			
-			
-			if(this.p.returnScore()%10 == 0 && this.p.returnScore()>0 && upgradeReady2) {
+
+			if (this.p.returnScore() % 10 == 0 && this.p.returnScore() > 0 && upgradeReady2) {
 				this.p.gainALife();
 				upgradeReady2 = false;
-				
+
 			}
-			
-			if(this.p.returnScore()%11 == 0 && this.p.returnScore()>0 && upgradeReady2 == false) {
+
+			if (this.p.returnScore() % 11 == 0 && this.p.returnScore() > 0 && upgradeReady2 == false) {
 				upgradeReady2 = true;
 			}
-			
-			
+
 			Enemy updatedEnemies[] = new Enemy[numEnemies];
 			Collect updatedCollects[] = new Collect[numC];
-			
+
 			for (int i = 0; i < numEnemies; i++) {
 				updatedEnemies[i] = this.eList[i].fallDown();
 				if (this.p.collisionE(updatedEnemies[i])) {
 					this.p.loseALife();
-					updatedEnemies[i]= this.eList[i].respawn();
-					//System.out.println(eList[i]);
+					updatedEnemies[i] = this.eList[i].respawn();
 
 				}
 			}
@@ -195,30 +185,28 @@ public class SquareEvade {
 				if (this.p.collisionC(updatedCollects[i])) {
 					System.out.println("collect");
 					this.p.addPoint();
-					updatedCollects[i]= this.cList[i].respawn();
-					//System.out.println(eList[i]);
+					updatedCollects[i] = this.cList[i].respawn();
 
 				}
 			}
-			
+
 			this.p.updateP();
 			this.eList = updatedEnemies;
 			this.cList = updatedCollects;
 
-			
 			break;
-			
+
 		case 2:
-			
-			for(int i = 0; i < numEnemies; i++ ) {
+
+			for (int i = 0; i < numEnemies; i++) {
 				this.eList[i] = this.eList[i].respawn();
 			}
-			for(int i = 0; i < numC; i++ ) {
+			for (int i = 0; i < numC; i++) {
 				this.cList[i] = this.cList[i].respawn();
 			}
-			
+
 			p.assignHighScore(this.p.returnScore());
-			
+
 			break;
 		}
 		return this;
@@ -228,8 +216,6 @@ public class SquareEvade {
 	 * does nothing
 	 */
 	public SquareEvade mousePressed(MouseEvent mev) {
-		// return new SquareEvade(e1.fallDown(), e2.fallDown(), e3.fallDown(),
-		// p.move());
 		return this;
 	}
 
@@ -239,29 +225,31 @@ public class SquareEvade {
 	public SquareEvade keyPressed(KeyEvent kev) {
 		this.p = this.p.keyHandle(kev);
 		if (kev.getKeyCode() == 32) {
-			
-			if(state == 0) {state = 1;}
-			else if(state == 2) { 
+
+			if (state == 0) {
+				state = 1;
+			} else if (state == 2) {
 				p.resetP();
 				for (int i = 0; i < cList.length; i++) {
 					this.cList[i].resetSpeed();
 				}
-				
+
 				for (int i = 0; i < eList.length; i++) {
 					this.eList[i].resetSpeed();
 				}
-				
-				state = 1;}
-			
+
+				state = 1;
+			}
+
 		}
-		
-		if(kev.getKeyCode()==77) {
-			if(state == 2) {
+
+		if (kev.getKeyCode() == 77) {
+			if (state == 2) {
 				p.resetP();
 				for (int i = 0; i < cList.length; i++) {
 					this.cList[i].resetSpeed();
 				}
-				
+
 				for (int i = 0; i < eList.length; i++) {
 					this.eList[i].resetSpeed();
 				}
@@ -270,19 +258,16 @@ public class SquareEvade {
 		}
 		return this;
 
-}
+	}
+
 	public SquareEvade keyReleased(KeyEvent kev) {
 		this.p = this.p.keyRelease(kev);
 		return this;
 
 	}
-	
+
 	public Player getPlayer() {
 		return this.p;
 	}
-	
 
-	
 }
-
-
